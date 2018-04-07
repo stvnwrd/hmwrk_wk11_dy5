@@ -40,6 +40,13 @@ Store.prototype.sellRecord = function (record) {
   this.removeRecord(record);
 };
 
+Store.prototype.inventoryTotalValue = function () {
+  return _.sumBy(this.inventory, 'price');
+};
+
+Store.prototype.financialSituation = function () {
+  return `Balance: £${this.balance} - Stock Value: £${this.inventoryTotalValue()}`
+};
 
 
 

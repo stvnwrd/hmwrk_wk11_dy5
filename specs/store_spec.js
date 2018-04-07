@@ -87,7 +87,13 @@ describe("Store", function(){
     assert.strictEqual(store2.balance, 515);
   });
 
+  it("should show the value of inventory", function(){
+    assert.strictEqual(store2.inventoryTotalValue(), 25);
+  });
 
+  it("should report financial situation of store", function(){
+    assert.strictEqual(store2.financialSituation(), 'Balance: £500 - Stock Value: £25');
+  });
 
 
 
