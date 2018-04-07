@@ -25,7 +25,11 @@ describe("Record", function(){
     assert.strictEqual(record1.price, 10)
   });
 
-  
+  it("should be possible to print out the record properties as a string", function(){
+    assert.strictEqual(record1.printProperties(), "Lanark Artefax - Whities 011 - Electronic - £10");
+  });
+
+
 
 
 

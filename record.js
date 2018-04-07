@@ -5,4 +5,8 @@ var Record = function(params){
   this.price = params.price;
 };
 
+Record.prototype.printProperties = function() {
+  return `${this.artist} - ${this.title} - ${this.genre} - £${this.price}`;
+};
+
 module.exports = Record;
