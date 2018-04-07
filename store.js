@@ -1,3 +1,5 @@
+var _ = require("lodash")
+
 var Store = function(params) {
   this.name = params.name;
   this.city = params.city;
@@ -8,5 +10,37 @@ var Store = function(params) {
 Store.prototype.addRecord = function (record) {
     this.inventory.push(record);
 };
+
+Store.prototype.listInventory = function () {
+  return this.inventory;
+};
+
+Store.prototype.inventoryTotalStock = function () {
+  return this.inventory.length;
+};
+
+Store.prototype.removeRecord = function (record) {
+  // Line below remove all occurences of a record
+  // return _.remove(this.inventory, record);
+
+  for(i in this.inventory){
+    if(this.inventory[i]==record) {
+      this.inventory.splice(i,1);
+      break;
+    }
+  }
+};
+
+Store.prototype.increaseBalanceByRecordPrice = function (record) {
+  this.balance += record.price;
+};
+
+Store.prototype.sellRecord = function (record) {
+  this.increaseBalanceByRecordPrice(record);
+  this.removeRecord(record);
+};
+
+
+
 
 module.exports = Store;

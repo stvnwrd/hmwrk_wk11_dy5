@@ -53,6 +53,42 @@ describe("Store", function(){
     assert.deepStrictEqual(store1.inventory, [record1, record2, record3])
   });
 
-  
+  it("should be possible to list the inventory", function(){
+    assert.deepStrictEqual(store2.listInventory(), [record1, record2]);
+  });
+
+  it("should be possible to get a total amount of records in the inventory", function(){
+    store2.addRecord(record3);
+    store2.addRecord(record1);
+    assert.strictEqual(store2.inventoryTotalStock(), 4);
+  })
+
+  it("should be possible to remove a record", function(){
+    store2.addRecord(record3);
+    store2.removeRecord(record2);
+    assert.strictEqual(store2.inventoryTotalStock(), 2);
+  });
+
+  it("should be possible to remove a single copy of a record when there is more than one copy of that record available", function(){
+    store2.addRecord(record2);
+    assert.strictEqual(store2.inventoryTotalStock(), 3);
+    store2.removeRecord(record2);
+    assert.strictEqual(store2.inventoryTotalStock(), 2);
+  });
+
+  it("it should be possible to increase the shop balance by the price of a record", function(){
+    store2.increaseBalanceByRecordPrice(record1);
+    assert.strictEqual(store2.balance, 510);
+  });
+
+  it("should be possible to sell a record, amending inventory and balance", function(){
+    store2.sellRecord(record2);
+    assert.deepStrictEqual(store2.inventory, [record1])
+    assert.strictEqual(store2.balance, 515);
+  });
+
+
+
+
 
 })

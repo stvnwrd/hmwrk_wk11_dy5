@@ -29,6 +29,8 @@ describe("Record", function(){
     assert.strictEqual(record1.printProperties(), "Lanark Artefax - Whities 011 - Electronic - £10");
   });
 
+  it
+
 
 
 
