@@ -48,6 +48,9 @@ Store.prototype.financialSituation = function () {
   return `Balance: £${this.balance} - Stock Value: £${this.inventoryTotalValue()}`
 };
 
+Store.prototype.filteredGenre = function () {
+  return _.filter(this.inventory, {'genre': 'Electronic'})
+};
 
 
 module.exports = Store;

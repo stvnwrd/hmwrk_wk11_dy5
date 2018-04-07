@@ -95,6 +95,12 @@ describe("Store", function(){
     assert.strictEqual(store2.financialSituation(), 'Balance: £500 - Stock Value: £25');
   });
 
+  it("should be possible to view all records of a given genre", function(){
+    store2.addRecord(record3);
+    assert.strictEqual(store2.inventoryTotalStock(), 3)
+    assert.deepStrictEqual(store2.filteredGenre("Electronic"), [record1, record3]);
+  });
 
 
+  
 })
