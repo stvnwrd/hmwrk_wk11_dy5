@@ -4,15 +4,10 @@ var Customer = function(params){
   this.name = params.name;
   this.collection = params.collection || [];
   this.money = params.money || 0;
-}
+};
 
 Customer.prototype.removeRecord = function (record) {
-  for(i in this.collection){
-    if(this.collection[i]==record) {
-      this.collection.splice(i,1);
-      break;
-    }
-  }
+  _.remove(this.collection, record);
 };
 
 Customer.prototype.increaseBalanceByRecordPrice = function (record) {
@@ -40,7 +35,6 @@ Customer.prototype.buyRecord = function (record) {
   } else {
     this.insufficientFunds(this.name, record.price);
   }
-
 };
 
 Customer.prototype.insufficientFunds = function (name, title) {
@@ -58,15 +52,16 @@ Customer.prototype.collectionValueByGenre = function (genre) {
 };
 
 Customer.prototype.mostValuableRecord = function () {
-  return _.maxBy(this.collection, 'price');
+  var firstFoundHighest = _.maxBy(this.collection, 'price');
+  return _.filter(this.collection, {'price': firstFoundHighest.price});
 };
 
 Customer.prototype.sortRecordsByValueAscending = function () {
-  return _.sortBy(this.collection, 'price');
+  return _.orderBy(this.collection, ['price', 'artist'], ['asc', 'asc'])
 };
 
 Customer.prototype.sortRecordsByValueDescending = function () {
-  return _.reverse(_.sortBy(this.collection, 'price'));
+  return _.orderBy(this.collection, ['price', 'artist'], ['desc', 'asc']);
 };
 
 Customer.prototype.compareCollectionValues = function (challenger) {
@@ -77,7 +72,6 @@ Customer.prototype.compareCollectionValues = function (challenger) {
   } else {
     return "Everyone is a loser in this situation, folks."
   }
-
 };
 
 module.exports = Customer;

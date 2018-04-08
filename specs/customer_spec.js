@@ -91,16 +91,16 @@ describe('Customer', function(){
   });
 
   it('should be possible to return the most valuable record in customer collection', function(){
-    assert.deepStrictEqual(customer1.mostValuableRecord(), record2);
+    assert.deepStrictEqual(customer1.mostValuableRecord(), [record2]);
   });
 
-  xit('should be possible return more than one record when the there is more than one most valuable record', function(){
+  it('should be possible return more than one record when the there is more than one most valuable record', function(){
     customer1.addRecord(record5);
-    assert.deepStrictEqual(customer1.mostValuableRecord(), record2);
+    assert.deepStrictEqual(customer1.mostValuableRecord(), [record2, record5]);
   });
 
   it('should be possible to sort records by ascending value', function(){
-    assert.deepStrictEqual(customer3.sortRecordsByValueAscending(), [record1, record3, record2, record5, record4]);
+    assert.deepStrictEqual(customer3.sortRecordsByValueAscending(), [record3, record1, record5, record2, record4]);
   });
 
   it('should be possible to sort records by descending value', function(){

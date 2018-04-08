@@ -20,8 +20,8 @@ Store.prototype.inventoryTotalStock = function () {
 };
 
 Store.prototype.removeRecord = function (record) {
-  // Line below remove all occurences of a record
-  // return _.remove(this.inventory, record);
+  // Line below removes all occurences of a record, rather just one
+  // _.remove(this.inventory, record);
 
   for(i in this.inventory){
     if(this.inventory[i]==record) {
