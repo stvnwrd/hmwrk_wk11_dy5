@@ -61,4 +61,23 @@ Customer.prototype.mostValuableRecord = function () {
   return _.maxBy(this.collection, 'price');
 };
 
+Customer.prototype.sortRecordsByValueAscending = function () {
+  return _.sortBy(this.collection, 'price');
+};
+
+Customer.prototype.sortRecordsByValueDescending = function () {
+  return _.reverse(_.sortBy(this.collection, 'price'));
+};
+
+Customer.prototype.compareCollectionValues = function (challenger) {
+  if (this.collectionValue() > challenger.collectionValue()){
+    return this;
+  } else if (challenger.collectionValue() > this.collectionValue()){
+    return challenger;
+  } else {
+    return "Everyone is a loser in this situation, folks."
+  }
+
+};
+
 module.exports = Customer;

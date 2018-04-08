@@ -18,6 +18,8 @@ describe('Customer', function(){
     record5 = new Record({artist: "Neu!", title:"Neu!", genre: "Rock", price: 15});
     customer1 = new Customer({name: "Hector", collection: [record1, record2], money: 20});
     customer2 = new Customer({name: "Dinah"});
+    customer3 = new Customer({name: "Mary", collection: [record1, record2, record3, record4, record5], money: 190});
+
   });
 
   it('should have a name', function(){
@@ -97,7 +99,19 @@ describe('Customer', function(){
     assert.deepStrictEqual(customer1.mostValuableRecord(), record2);
   });
 
-  
+  it('should be possible to sort records by ascending value', function(){
+    assert.deepStrictEqual(customer3.sortRecordsByValueAscending(), [record1, record3, record2, record5, record4]);
+  });
+
+  it('should be possible to sort records by descending value', function(){
+    assert.deepStrictEqual(customer3.sortRecordsByValueDescending(), [record4, record5, record2, record3, record1]);
+  });
+
+  it('should be possible to say which customer of two has the more expensive collection', function(){
+    assert.strictEqual(customer1.compareCollectionValues(customer3), customer3);
+    assert.strictEqual(customer3.compareCollectionValues(customer1), customer3);
+  })
+
 
 
 
