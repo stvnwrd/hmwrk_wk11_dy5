@@ -15,6 +15,7 @@ describe('Customer', function(){
     record2 = new Record({artist: "Wire", title: "Chairs Missing", genre: "Post Punk", price: 15});
     record3 = new Record({artist: "Avalon Emerson", title: "Whities 013", genre: "Electronic", price: 10});
     record4 = new Record({artist: "Alice Coltrane", title:"Ptah, The El Daoud", genre: "Jazz", price: 25});
+    record5 = new Record({artist: "Neu!", title:"Neu!", genre: "Rock", price: 15});
     customer1 = new Customer({name: "Hector", collection: [record1, record2], money: 20});
     customer2 = new Customer({name: "Dinah"});
   });
@@ -70,5 +71,36 @@ describe('Customer', function(){
     assert.deepStrictEqual(customer1.collection, [record1, record2, record3]);
     assert.strictEqual(customer1.money, 10);
   });
+
+  it('should not be possible for customer to buy a record if they cannot afford it', function(){
+    customer1.buyRecord(record4);
+    assert.deepStrictEqual(customer1.collection, [record1, record2]);
+    assert.strictEqual(customer1.money, 20);
+  });
+
+  it('should be possible for customer to view the total value of their collection', function(){
+    assert.strictEqual(customer1.collectionValue(), 25)
+  });
+
+  it('should be possible to view the total value of all records of a given genre', function(){
+    customer1.addRecord(record3);
+    assert.deepStrictEqual(customer1.collection, [record1, record2, record3]);
+    assert.strictEqual(customer1.collectionValueByGenre("Electronic"), 20)
+  });
+
+  it('should be possible to return the most valuable record in customer collection', function(){
+    assert.deepStrictEqual(customer1.mostValuableRecord(), record2);
+  });
+
+  xit('should be possible return more than one record when the there is more than one most valuable record', function(){
+    customer1.addRecord(record5);
+    assert.deepStrictEqual(customer1.mostValuableRecord(), record2);
+  });
+
+  
+
+
+
+
 
 });

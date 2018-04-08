@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var Customer = function(params){
   this.name = params.name;
   this.collection = params.collection || [];
@@ -32,8 +34,31 @@ Customer.prototype.decreaseBalanceByRecordPrice = function (record) {
 };
 
 Customer.prototype.buyRecord = function (record) {
-  this.decreaseBalanceByRecordPrice(record);
-  this.addRecord(record);
+  if (this.money >= record.price){
+    this.decreaseBalanceByRecordPrice(record);
+    this.addRecord(record);
+  } else {
+    this.insufficientFunds(this.name, record.price);
+  }
+
+};
+
+Customer.prototype.insufficientFunds = function (name, title) {
+  return `Sorry ${name}, you have insufficient funds to buy ${title}.`
+};
+
+Customer.prototype.collectionValue = function () {
+  return _.sumBy(this.collection, 'price');
+};
+
+
+Customer.prototype.collectionValueByGenre = function (genre) {
+  var filtered = _.filter(this.collection, {genre: genre});
+  return _.sumBy(filtered, 'price');
+};
+
+Customer.prototype.mostValuableRecord = function () {
+  return _.maxBy(this.collection, 'price');
 };
 
 module.exports = Customer;
